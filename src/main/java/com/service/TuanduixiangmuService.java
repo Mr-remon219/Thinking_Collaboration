@@ -32,7 +32,9 @@ public interface TuanduixiangmuService extends IService<TuanduixiangmuEntity> {
    	
    	PageUtils queryPage(Map<String, Object> params,Wrapper<TuanduixiangmuEntity> wrapper);
 
-   	
+
+
+   	//数据库里怎么修改的
 
 }
 

@@ -53,12 +53,6 @@ public class TuanduixiangmuController {
     private TuanduixiangmuService tuanduixiangmuService;
 
 
-
-
-    
-
-
-
     /**
      * 后端列表
      */
@@ -182,7 +176,16 @@ public class TuanduixiangmuController {
         return R.ok();
     }
     
-	
+
+    @RequestMapping("/wancheng")
+    public R updatewancheng(@RequestBody TuanduixiangmuEntity tuanduixiangmu, int dex){
+        EntityWrapper< TuanduixiangmuEntity> ew = new EntityWrapper< TuanduixiangmuEntity>();
+        ew.allEq(MPUtil.allEQMapPre( tuanduixiangmu, "tuanduixiangmu"));
+        tuanduixiangmu.setWanchengdu(dex);
+        tuanduixiangmuService.updateById(tuanduixiangmu);
+        return R.ok();
+    }
+
 
 
 

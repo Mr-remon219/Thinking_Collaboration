@@ -59,7 +59,6 @@ public class TuanduixiangmuModel  implements Serializable {
 	
 	private String xiangmuxuqiu;
 				
-	
 	/**
 	 * 设置：项目分类
 	 */

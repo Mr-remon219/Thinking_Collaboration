@@ -20,7 +20,7 @@ public class MPUtil {
 	public static final char UNDERLINE = '_';
 
 	
-	//mybatis plus allEQ 表达式转换
+	//mybatis plus allEQ 表达式转换，将其转换为map
 		public static Map allEQMapPre(Object bean,String pre) {
 		   Map<String, Object> map =BeanUtil.beanToMap(bean);
 		  return camelToUnderlineMap(map,pre);
@@ -184,7 +184,8 @@ public class MPUtil {
 	public static void main(String[] ages) {
 		System.out.println(camelToUnderline("ABCddfANM"));
 	}
-	
+
+	//将一个Map对象中的所有键（key）从驼峰命名法（camelCase）转换为下划线命名法（snake_case）
 	public static Map camelToUnderlineMap(Map param, String pre) {
 
 		Map<String, Object> newMap = new HashMap<String, Object>();

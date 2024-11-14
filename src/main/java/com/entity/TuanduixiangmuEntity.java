@@ -92,8 +92,18 @@ public class TuanduixiangmuEntity<T> implements Serializable {
 	 */
 					
 	private String xiangmuxuqiu;
-	
-	
+
+
+	private String[] renwu = new String[20];
+
+	private int idx = 0;
+
+	private int renwushuliang;
+
+	private int wanchengdu = 0;
+
+	int yiwancheng = 0;
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;
@@ -197,4 +207,31 @@ public class TuanduixiangmuEntity<T> implements Serializable {
 		return xiangmuxuqiu;
 	}
 
+	public String[] getRenwu() {
+		return renwu;
+	}
+
+	public void setRenwu(String[] renwu) {
+		this.renwu = renwu;
+	}
+
+	public int getRenwushuliang() {
+		return renwushuliang;
+	}
+
+	public void setRenwushuliang(int renwushuliang) {
+		this.renwushuliang = renwushuliang;
+	}
+
+	public String getWanchengdu() {
+		String swan = wanchengdu * 100 + "%";
+		return swan;
+	}
+
+	public void setWanchengdu(int dex) {
+		this.yiwancheng += 1;
+		this.wanchengdu = yiwancheng / renwushuliang;
+		this.renwu[dex] = null;
+
+	}
 }

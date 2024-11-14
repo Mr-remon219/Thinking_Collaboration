@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.List;
@@ -20,7 +21,10 @@ import com.entity.view.ChengyuanView;
 
 @Service("chengyuanService")
 public class ChengyuanServiceImpl extends ServiceImpl<ChengyuanDao, ChengyuanEntity> implements ChengyuanService {
-	
+
+
+
+
 	
     @Override
     public PageUtils queryPage(Map<String, Object> params) {

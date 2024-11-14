@@ -32,6 +32,8 @@ USE `springboot22668yvo`;
 DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+
+
 CREATE TABLE `address` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
