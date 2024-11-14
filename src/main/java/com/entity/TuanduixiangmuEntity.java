@@ -2,22 +2,15 @@ package com.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.lang.reflect.InvocationTargetException;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.beanutils.BeanUtils;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 
 
@@ -94,7 +87,13 @@ public class TuanduixiangmuEntity<T> implements Serializable {
 	private String xiangmuxuqiu;
 
 
-	private String[] renwu = new String[20];
+	private String[] renwu = new String[50];
+
+	int type = 0;
+
+	private String[] TypeName = new String[50];
+
+
 
 	private int idx = 0;
 
@@ -102,7 +101,9 @@ public class TuanduixiangmuEntity<T> implements Serializable {
 
 	private int wanchengdu = 0;
 
-	int yiwancheng = 0;
+	private int[] sign = new int[50];
+
+	private int yiwancheng = 0;
 
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
@@ -221,17 +222,117 @@ public class TuanduixiangmuEntity<T> implements Serializable {
 
 	public void setRenwushuliang(int renwushuliang) {
 		this.renwushuliang = renwushuliang;
+		this.idx = renwushuliang - 1;
 	}
+
 
 	public String getWanchengdu() {
 		String swan = wanchengdu * 100 + "%";
 		return swan;
 	}
 
-	public void setWanchengdu(int dex) {
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public String[] getTypeName() {
+		return TypeName;
+	}
+
+	public void setTypeName(String[] typeName) {
+		TypeName = typeName;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+
+	public int getYiwancheng() {
+		return yiwancheng;
+	}
+
+	public void setYiwancheng(int yiwancheng) {
+		this.yiwancheng = yiwancheng;
+	}
+
+	public void inserttype(String Type)
+	{
+		this.TypeName[this.idx] = Type;
+		this.type += 1;
+	}
+
+	public void updatetype(String Oldtype, String Newtype){
+		for (int i = 0; i < this.TypeName.length; i++)
+			if (this.TypeName[i] == Oldtype)
+				this.TypeName[i] = Newtype;
+	}
+
+	public void deleterenwu(String renwuname)
+	{
+		for (int i = 0; i < this.renwu.length; i++)
+		{
+			if (this.renwu[i].equals(renwuname))
+			{
+				this.renwu[i] = null;
+				this.setWanchengdu(i);
+				this.sign[i] = -1;
+			}
+		}
+	}
+
+	public void deletetype(String Type)
+	{
+		int t = 0;
+		for (int i = 0; i < this.TypeName.length; i++)
+		{
+			if (this.TypeName[i] == Type)
+				t = i;
+		}
+		for (int i = 0; i < this.renwu.length; i++)
+		{
+			if (this.sign[i] == t)
+			{
+				this.sign[i] = -1;
+				this.renwu[i] = null;
+			}
+		}
+		this.TypeName[t] = null;
+	}
+
+		public void updateWanchengdu(){
+		this.wanchengdu = yiwancheng / renwushuliang;
+	}
+
+	public void insertRenwu(String xin, String Type)
+	{
+		int t = 0;
+		for (int i = 0; i < TypeName.length; i++)
+			if (TypeName[i] == Type)
+				t = i;
+
+		this.renwu[this.idx] = xin;
+		this.sign[this.idx] = t;
+		this.idx = this.idx + 1;
+		this.renwushuliang += 1;
+		this.updateWanchengdu();
+	}
+
+	public void updaterenwu(String xin, int dex)
+	{
+		this.renwu[dex] = xin;
+	}
+
+		public void setWanchengdu(int dex) {
 		this.yiwancheng += 1;
 		this.wanchengdu = yiwancheng / renwushuliang;
 		this.renwu[dex] = null;
-
 	}
 }

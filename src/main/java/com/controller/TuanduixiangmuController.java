@@ -163,8 +163,6 @@ public class TuanduixiangmuController {
         return R.ok();
     }
 
-
-
     
 
     /**
@@ -177,14 +175,53 @@ public class TuanduixiangmuController {
     }
     
 
-    @RequestMapping("/wancheng")
-    public R updatewancheng(@RequestBody TuanduixiangmuEntity tuanduixiangmu, int dex){
-        EntityWrapper< TuanduixiangmuEntity> ew = new EntityWrapper< TuanduixiangmuEntity>();
-        ew.allEq(MPUtil.allEQMapPre( tuanduixiangmu, "tuanduixiangmu"));
-        tuanduixiangmu.setWanchengdu(dex);
+    @RequestMapping("/deleterenwu")
+    public R deleterenwu(@RequestBody TuanduixiangmuEntity tuanduixiangmu, String renwuname){
+        tuanduixiangmu.deleterenwu(renwuname);
         tuanduixiangmuService.updateById(tuanduixiangmu);
         return R.ok();
     }
+
+    @RequestMapping("/insertrenwu")
+    public R insertrenwu(@RequestBody TuanduixiangmuEntity tuanduixiangmu, String xin, String Type){
+        tuanduixiangmu.insertRenwu(xin, Type);
+        tuanduixiangmuService.updateById(tuanduixiangmu);
+        return R.ok();
+    }
+
+    @RequestMapping("/updaterenwu")
+    public R updaterenwu(@RequestBody TuanduixiangmuEntity tuanduixiangmu, String xin, int dex){
+        tuanduixiangmu.updaterenwu(xin, dex);
+        tuanduixiangmuService.updateById(tuanduixiangmu);
+        return R.ok();
+    }
+
+
+    @RequestMapping("/inserttype")
+    public R inserttype(@RequestBody TuanduixiangmuEntity tuanduixiangmu, String Type){
+        tuanduixiangmu.inserttype(Type);
+        tuanduixiangmuService.updateById(tuanduixiangmu);
+        return R.ok();
+    }
+
+    @RequestMapping("/updatetype")
+    public R updatetype(@RequestBody TuanduixiangmuEntity tuanduixiangmu, String OldType, String NewType){
+        tuanduixiangmu.updatetype(OldType, NewType);
+        tuanduixiangmuService.updateById(tuanduixiangmu);
+        return R.ok();
+    }
+
+    @RequestMapping("/deletetype")
+    public R deletetype(@RequestBody TuanduixiangmuEntity tuanduixiangmu, String Type){
+        tuanduixiangmu.deletetype(Type);
+        tuanduixiangmuService.updateById(tuanduixiangmu);
+        return R.ok();
+    }
+
+
+
+
+
 
 
 
